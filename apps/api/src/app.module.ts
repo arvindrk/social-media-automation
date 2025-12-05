@@ -3,10 +3,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthController } from './health.controller';
 import { DebugQueueController } from './debug-queue.controller';
+import { DebugPlannerController } from './debug-planner.controller';
 
 @Module({
   imports: [],
-  controllers: [AppController, HealthController, DebugQueueController],
+  controllers: [
+    AppController, 
+    HealthController, 
+    DebugQueueController,
+    DebugPlannerController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}

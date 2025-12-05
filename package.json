@@ -14,6 +14,7 @@
     "@prisma/client": "^7.1.0",
     "@types/bun": "latest",
     "@types/node": "^24.10.1",
+    "@types/node-cron": "^3.0.11",
     "prisma": "^7.1.0"
   },
   "peerDependencies": {
@@ -27,8 +28,11 @@
     "@prisma/adapter-neon": "^7.1.0",
     "axios": "^1.13.2",
     "bullmq": "^5.65.1",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "dotenv": "^17.2.3",
     "ioredis": "^5.8.2",
+    "node-cron": "^4.2.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "zod": "^4.1.13"
