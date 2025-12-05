@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    // Environment setup - targeting Node 20 / ES2022
+    "lib": ["ES2022"],
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Bundler mode (Bun-compatible)
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Strict mode enabled
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Decorators for NestJS
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    // Stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Base URL and path aliases for monorepo packages
+    "baseUrl": ".",
+    "paths": {
+      "@core-types/*": ["packages/core-types/src/*"],
+      "@core-config/*": ["packages/core-config/src/*"],
+      "@core-db/*": ["packages/core-db/src/*"],
+      "@core-llm/*": ["packages/core-llm/src/*"],
+      "@core-queue/*": ["packages/core-queue/src/*"],
+      "@ig-client/*": ["packages/ig-client/src/*"],
+      "@media-pipeline/*": ["packages/media-pipeline/src/*"],
+      "@agents-config/*": ["packages/agents-config/src/*"],
+      "@analytics-engine/*": ["packages/analytics-engine/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/dist/**"]
+}

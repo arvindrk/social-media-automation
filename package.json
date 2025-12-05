@@ -1,0 +1,31 @@
+{
+  "name": "social-media-automation",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev:api": "cd apps/api && bun --watch src/main.ts",
+    "build:api": "cd apps/api && nest build",
+    "dev:worker-jobs": "bun --watch apps/worker-jobs/src/main.ts",
+    "dev:worker-render": "bun --watch apps/worker-render/src/main.ts"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.14",
+    "@types/bun": "latest",
+    "@types/node": "^24.10.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.9",
+    "@nestjs/core": "^11.1.9",
+    "@nestjs/platform-express": "^11.1.9",
+    "axios": "^1.13.2",
+    "bullmq": "^5.65.1",
+    "ioredis": "^5.8.2",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.1.13"
+  }
+}
