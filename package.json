@@ -6,7 +6,7 @@
   "scripts": {
     "dev:api": "bun --watch apps/api/src/main.ts",
     "build:api": "cd apps/api && nest build",
-    "dev:worker-jobs": "bun --watch apps/worker-jobs/src/main.ts",
+    "dev:worker-jobs": "bun --watch apps/worker-jobs/src/worker-main.ts",
     "dev:worker-render": "bun --watch apps/worker-render/src/main.ts"
   },
   "devDependencies": {
