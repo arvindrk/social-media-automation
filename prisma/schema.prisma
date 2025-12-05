@@ -1,6 +1,9 @@
 // Prisma schema for social-media-automation
 // Learn more: https://pris.ly/d/prisma-schema
 // Database URL is configured in prisma.config.ts
+//
+// After changes, run:
+//   bunx prisma migrate dev --name init_core_models
 
 generator client {
   provider = "prisma-client-js"
@@ -10,6 +13,78 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// =============================================================================
+// Core Models
+// =============================================================================
+
+/// Per-account content styling and prompt configuration
+model Theme {
+  id             String    @id @default(cuid())
+  name           String
+  description    String?
+  
+  // Sub-configs as JSON (see core-types for TypeScript interfaces)
+  visualConfig   Json      // colors, fonts, effects, branding
+  voiceConfig    Json      // personality, tone, writing style
+  contentConfig  Json      // hooks, CTAs, video length, hashtags
+  audienceConfig Json      // target demo, topics, cultural context
+  audioConfig    Json      // music, voiceover, sound effects
+  promptConfig   Json      // system prompts, templates, examples
+  
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+}
+
+/// An Instagram account we manage
+model Account {
+  id                   String   @id @default(cuid())
+  name                 String
+  instagramBusinessId  String
+  facebookPageId       String
+  accessTokenEncrypted String
+  timezone             String
+  postingWindowStart   String   // "HH:mm"
+  postingWindowEnd     String   // "HH:mm"
+  minPostsPerDay       Int
+  maxPostsPerDay       Int
+  themeId              String
+  theme                Theme    @relation(fields: [themeId], references: [id])
+  jobs                 Job[]
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+/// Job status enum
+enum JobStatus {
+  PENDING
+  RUNNING
+  FAILED
+  POSTED
+}
+
+/// One unit of content creation/posting
+model Job {
+  id            String    @id @default(cuid())
+  accountId     String
+  account       Account   @relation(fields: [accountId], references: [id])
+  scheduledFor  DateTime
+  status        JobStatus
+  idea          Json?
+  scripts       Json?
+  assets        Json?
+  finalVideoUrl String?
+  igMediaId     String?
+  error         String?
+  analytics     Json?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// =============================================================================
+// System
+// =============================================================================
 
 /// System metadata table for health checks and migrations tracking
 model SystemMeta {
