@@ -1,0 +1,18 @@
+// Prisma schema for social-media-automation
+// Learn more: https://pris.ly/d/prisma-schema
+// Database URL is configured in prisma.config.ts
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// System metadata table for health checks and migrations tracking
+model SystemMeta {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+}

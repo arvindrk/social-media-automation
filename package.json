@@ -4,25 +4,30 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev:api": "cd apps/api && bun --watch src/main.ts",
+    "dev:api": "bun --watch apps/api/src/main.ts",
     "build:api": "cd apps/api && nest build",
     "dev:worker-jobs": "bun --watch apps/worker-jobs/src/main.ts",
     "dev:worker-render": "bun --watch apps/worker-render/src/main.ts"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.14",
+    "@prisma/client": "^7.1.0",
     "@types/bun": "latest",
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "prisma": "^7.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
     "@nestjs/common": "^11.1.9",
     "@nestjs/core": "^11.1.9",
     "@nestjs/platform-express": "^11.1.9",
+    "@prisma/adapter-neon": "^7.1.0",
     "axios": "^1.13.2",
     "bullmq": "^5.65.1",
+    "dotenv": "^17.2.3",
     "ioredis": "^5.8.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
