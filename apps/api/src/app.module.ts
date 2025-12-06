@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { HealthController } from './health.controller';
 import { DebugQueueController } from './debug-queue.controller';
-import { DebugPlannerController } from './debug-planner.controller';
+import { DevSchedulerController } from './dev-scheduler.controller';
 
 @Module({
   imports: [],
@@ -11,7 +11,7 @@ import { DebugPlannerController } from './debug-planner.controller';
     AppController, 
     HealthController, 
     DebugQueueController,
-    DebugPlannerController,
+    DevSchedulerController,
   ],
   providers: [AppService],
 })

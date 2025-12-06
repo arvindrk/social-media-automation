@@ -3,7 +3,7 @@
  * Provides type-safe queue creation and job processing
  */
 
-import { Queue, Worker, type Processor, type QueueOptions, type WorkerOptions } from 'bullmq';
+import { Queue, Worker, type Processor, type QueueOptions, type WorkerOptions, type JobsOptions } from 'bullmq';
 import Redis from 'ioredis';
 import { getConfig } from '@core-config/index';
 
@@ -20,6 +20,12 @@ export const QUEUES = {
 } as const;
 
 export type QueueName = typeof QUEUES[keyof typeof QUEUES];
+
+// ============================================================================
+// Platform Types
+// ============================================================================
+
+export type PlatformType = 'instagram' | 'youtube' | 'tiktok';
 
 // ============================================================================
 // Job Payload Types
@@ -39,9 +45,12 @@ export interface MediaPipelineJobPayload {
   mediaUrl: string;
 }
 
+/** Publish job payload - platform-agnostic publishing */
 export interface PublishJobPayload {
   jobId: string;
-  contentId: string;
+  accountId: string;
+  platform: PlatformType;
+  scheduledFor: string; // ISO timestamp
 }
 
 export interface AnalyticsJobPayload {
@@ -171,3 +180,6 @@ export async function closeRedisConnection(): Promise<void> {
     console.log('[core-queue] Redis connection closed');
   }
 }
+
+// Re-export JobsOptions for delayed job configuration
+export type { JobsOptions };

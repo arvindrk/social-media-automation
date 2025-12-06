@@ -92,19 +92,26 @@ export async function getAccountById(id: string): Promise<Account | null> {
 // =============================================================================
 
 /**
+ * Creates a single job
+ */
+export async function createJob(input: CreateJobInput): Promise<Job> {
+  return db.job.create({
+    data: {
+      accountId: input.accountId,
+      scheduledFor: input.scheduledFor,
+      status: 'PENDING',
+    },
+  });
+}
+
+/**
  * Creates multiple jobs in a batch
  */
 export async function createJobs(jobs: CreateJobInput[]): Promise<Job[]> {
   const createdJobs: Job[] = [];
   
   for (const job of jobs) {
-    const created = await db.job.create({
-      data: {
-        accountId: job.accountId,
-        scheduledFor: job.scheduledFor,
-        status: 'PENDING',
-      },
-    });
+    const created = await createJob(job);
     createdJobs.push(created);
   }
   
